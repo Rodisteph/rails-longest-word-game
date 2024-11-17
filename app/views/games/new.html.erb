@@ -1,0 +1,24 @@
+
+<h1>Mon jeux</h1>
+<p>Use the letters below to form a word:</p>
+<p><%= @letters.join(' ') %></p>
+
+<%= form_with url: '/score', method: :post do %>
+  <%= label_tag :word, "Your word:" %>
+  <%= text_field_tag :word %>
+  <%= hidden_field_tag :letters, @letters.join %>
+  <%= submit_tag "Submit" %>
+<% end %>
+<h1>Composez un mot</h1>
+<p>Voici vos lettres :</p>
+<p><%= @letters.join(" ") %></p>
+
+<form action="/score" method="post" data-turbo="false">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <div>
+    <label for="word">Votre mot :</label>
+    <input type="text" id="word" name="word">
+  </div>
+  <input type="hidden" name="letters" value="<%= @letters.join(",") %>">
+  <button type="submit">Valider</button>
+</form>
